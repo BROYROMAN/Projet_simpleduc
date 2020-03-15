@@ -1,0 +1,32 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Gestion des Traitements {% endblock %}
+       
+{% block contenu %} <h1> Gestion des Traitements </h1> 
+
+{% if form.valide is defined %} 
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+       {% else %}  
+       <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+    {% endif %}         
+{% endif %}         
+    
+<div class="panel">
+  <!-- Default panel contents -->
+  <div class="panel-heading background-violet">Liste des Traitements - <a href="index.php?page=traiterajout" class="blanc">Ajouter un Traitement</a></div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+  <table class="table table-hover table-striped">
+      <tr><th>Libellé Tache</th><th>Developpeur</th><th>nbheure</th><th></th></tr>
+   {% for e in liste %}
+          <tr><td>{{e.libellet}}</td><td>{{e.nomd}} {{e.prenomd}} </td><td>{{e.nbheure}} </td><td> <div class="btn-group btn-group-lg"><a href="index.php?page=traitermodif&id={{e.idtrait}}"><span class="glyphicon glyphicon-pencil violet" aria-hidden="true"></span></a></div></td><td><div class="btn-group btn-group-lg"><a href="index.php?page=traiter&id={{e.idtrait}}"><span class="glyphicon glyphicon-trash violet" aria-hidden="true"></span></a></div></td></tr> 
+   {% endfor %}    
+  </table>
+  </div>
+</div>
+
+{% endblock %} 
+
+

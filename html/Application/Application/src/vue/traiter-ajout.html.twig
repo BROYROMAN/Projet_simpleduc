@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'un traitement {% endblock %}
+       
+{% block contenu %} <h1> Ajout d'un traitement  </h1> 
+
+{% if form.valide is defined %} 
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">Ajout réussie</h1>
+    {% else %} 
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+    {% endif %}     
+{% else %}      
+    
+<div class="panel-body">
+  <form  class="form-signin" action="index.php?page=traiterajout" method="post" enctype="application/x-www-form-urlencoded">
+   <label for="tache" class="sr-only">Tache:</label>
+    <select name="tache" id="tache" class="form-control">
+        
+        {% for r in form.liste %}
+            <option value="{{ r.id }}">{{ r.libelle }} </option> 
+        {% endfor%}    
+    </select>  
+    
+    <select name="dev" id="dev" class="form-control">
+        
+        {% for r in form.liste2 %}
+            <option value="{{ r.codedev }}">{{ r.nom }} {{ r.prenom }} </option> 
+        {% endfor%}    
+    </select>
+    
+     <label for="nbheure" class="sr-only">nbheure</label>
+    <input type="text" id="nbheure" name="nbheure" class="form-control" placeholder="Saisir un nombre heure " required autofocus>
+    
+    
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAjouter">Ajouter</button>
+  </form>
+</div>    
+{% endif %}
+{% endblock %} 

@@ -1,0 +1,112 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title> {% block title %} Simpléduc - Gestion des projets {% endblock %}</title>
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="favicon.ico" />
+        {% block style %} {% endblock %}
+    </head>    
+    <body class="bg-light">
+        {% block body %}
+         
+        <nav class="navbar navbar-inverse navbar-default navbarnavbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              </button>
+             <a class="navbar-brand" href="#">
+               <img alt="Brand" src="images/logo.png" class="img-circle" />
+             </a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li class="active"><a href="index.php">Accueil</a></li>
+              {%if session.login is defined %}
+                {%if session.role == 1 %}
+                <li class="dropdown">
+                 <a class="dropdown-toggle" href="" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Administration</a>
+                 <ul class="dropdown-menu">
+                     <li><b>Utilisateurs</b></li>
+                     <li><a class="dropdown-item" href="index.php?page=utilisateur">Gestion des utilisateurs</a></li>
+                     <li><a class="dropdown-item" href="index.php?page=listeutilisateurpdf">Liste des projets de chaque utilisateur</a></li>
+                     <li><a class="dropdown-item" href="index.php?page=utilisateurpdf">PDF des projets de chaque utilisateur</a></li>
+                     <li role="separator" class="divider"></li>
+                     <li><b>Equipes</b></li>
+                     <li><a class="dropdown-item" href="index.php?page=equipe">Gestion des équipes</a></li>
+                     <li role="separator" class="divider"></li>
+                     <li><b>Projets</b></li>
+                     <li><a class="dropdown-item" href="index.php?page=projets">Gestion des projets</a></li>
+                     <li><a class="dropdown-item" href="index.php?page=listeprojetpdf">Afficher projet choisi par l'utilisateur</a></li>
+                     <li><a class="dropdown-item" href="index.php?page=listetachepdf">Afficher pour une tache d'un projet ses informations</a></li>
+                     <li><a class="dropdown-item" href="index.php?page=listetacheprojetpdf">Afficher les taches d'un projet ses informations</a></li>
+                      <li role="separator" class="divider"></li>
+                     <li><b>Developpeurs</b></li>
+                     <li><a class="dropdown-item" href="index.php?page=developpeurs">Gestion des developpeurs</a></li>
+                     <li role="separator" class="divider"></li>
+                     <li><b>Outils</b></li>
+                     <li><a class="dropdown-item" href="index.php?page=outils">Gestion des outils</a></li>
+                     <li role="separator" class="divider"></li>
+                     <li><b>Contrat</b></li>
+                     <li><a class="dropdown-item" href="index.php?page=contrat">Gestion des contrats</a></li>
+                 <li role="separator" class="divider"></li>
+                     <li><b>Tache</b></li>
+                     <li><a class="dropdown-item" href="index.php?page=tache">Gestion des taches</a></li>
+                 <li role="separator" class="divider"></li>
+                 <li><b>Traitement</b></li>
+                     <li><a class="dropdown-item" href="index.php?page=traiter">Gestion des traitements</a></li>
+                 
+                 </ul>
+                </li>
+                {% endif %}
+              {% endif %}
+              <li><a href="index.php?page=apropos">À propos</a></li>
+              <li><a href="index.php?page=mentions">Mentions légales</a></li>
+              {%if session.login is defined %}
+                <li><a href="index.php?page=deconnexion">Se déconnecter</a></li>
+              {% endif %}
+              {%if session.login is defined %}
+                <li><a href="#">{{session.login}}</a></li>
+              {% endif %}
+            </ul>
+          
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+        
+                <div class="row" >
+                    <div class="center-block col-md-10" style="float:none">   
+                   
+                    {% block contenu %}
+                        
+                    {% endblock %} 
+                  
+                    
+                </div>
+                </div>      
+            
+               
+        {% endblock %}    
+         <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/jquery-3.2.1.min.js"><\/script>')</script>
+    <script src="js/bootstrap.min.js"></script>
+     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> 
+    <script src="js/script.js"> </script>
+   
+    </body>
+</html>

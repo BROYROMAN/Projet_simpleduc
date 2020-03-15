@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Gestion des developpeurs {% endblock %}
+       
+{% block contenu %} <h1> Gestion des developpeurs </h1> 
+
+{% if form.valide is defined %} 
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+       {% else %}  
+       <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+    {% endif %}         
+{% endif %}         
+    
+<div class="panel">
+  <!-- Default panel contents -->
+  <div class="panel-heading background-violet">Liste des developpeurs - <a href="index.php?page=developpeursajout" class="blanc">Ajouter un developpeurs</a> - <a href="index.php?page=maitrise" class="blanc">Ajouter une competence a un dev</a></div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+   <table class="table table-hover table-striped">
+      <tr><th>Nom</th><th>Prenom</th><th>Date de Naissance</th><th>Telephone</th><th>Adresse</th><th>Remuneration</th><th>Cout Horaire</th><th>Equipe</th><th>Outils</th></tr>
+   {% for p in liste %}
+          <tr><td>{{p.nom}}</td><td>{{p.prenom}}</td> <td>{{p.date_naiss}} </td><td>{{p.tel}} </td><td>{{p.adresse}} </td><td>{{p.remuneration}} </td><td>{{p.couthoraire}} </td><td>{%if p.idEquipe==NULL %}Pas d'équipe {%else%} {{p.libelleequipe}} {%endif%}</td><td>{{p.libelleoutils}} </td>
+              <td> <div class="btn-group btn-group-lg"><a href="index.php?page=developpeursmodif&codedev={{p.codedev}}"><span class="glyphicon glyphicon-pencil violet" aria-hidden="true"></span></a></div>
+              </td><td><div class="btn-group btn-group-lg"><a href="index.php?page=developpeurs&codedev={{p.codedev}}"><span class="glyphicon glyphicon-trash violet" aria-hidden="true"></span></a></div></td></tr> 
+   {% endfor %}    
+  </table>
+   
+  </div>
+</div>
+
+{% endblock %} 
+
+

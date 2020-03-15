@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'une tache {% endblock %}
+       
+{% block contenu %} <h1> Modification d'une tache </h1> 
+
+{% if form.tache is defined %} 
+    {% if form.tache != null %}    
+        <div class="panel-body">
+        <form  class="form-signin" action="index.php?page=tachemodif" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" id="id" name="id" value="{{form.tache.id}}"/> 
+        <label for="libelle" class="sr-only">Libellé:</label>
+        <input type="text" id="libelle" name="libelle" class="form-control" placeholder="Saisir un libellé" value="{{form.tache.libelle}}" required autofocus>
+       <label for="heureprevue" class="sr-only">Heure Prevue:</label>
+        <input type="text" id="heureprevue" name="heureprevue" class="form-control" placeholder="Saisir une heure prevue" value="{{form.tache.heureprevue}}" required autofocus>
+        <label for="idp" class="sr-only">Nom Projet:</label>
+        <select name="idp" id="idp" class="form-control">
+            
+        {% for u in form.liste %}
+              
+                <option value="{{ u.codeResponsable }}" selected>{{ u.nom }} </option> 
+                
+        {% endfor%}    
+        </select> 
+        <label for="cout" class="sr-only">Cout:</label>
+    <input type="text" id="cout" name="cout" class="form-control" placeholder="Saisir un cout  de tache " value ="{{form.tache.cout}}" required autofocus>
+    
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Ajouter</button>
+        </form>
+        </div> 
+    {% else %}  
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=tache" class="violet">Retourner sur la liste des taches</a></h1>
+        {% else %}    
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=tache" class="violet">Retourner sur la liste des taches</a></h1>
+        {% endif %} 
+    {% endif %} 
+{% else %} 
+     <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+     <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=tache" class="violet">Retourner sur la liste des taches</a></h1>
+       
+{% endif %}
+{% endblock %} 

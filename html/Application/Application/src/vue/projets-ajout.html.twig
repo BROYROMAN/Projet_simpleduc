@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'un projet {% endblock %}
+       
+{% block contenu %} <h1> Ajout d'un Projet </h1> 
+
+{% if form.valide is defined %} 
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">Ajout réussie</h1>
+    {% else %} 
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+    {% endif %}     
+{% else %}      
+    
+<div class="panel-body">
+  <form  class="form-signin" action="index.php?page=projetsajout" method="post" enctype="application/x-www-form-urlencoded">
+       <label for="nom" class="sr-only">Nom projet:</label>
+    <input type="text" id="nom" name="nom" class="form-control" placeholder="Saisir un nomde projet" required autofocus>
+    <label for="inputnbdev" class="sr-only">Nombre de Developpeur:</label>
+    <input type="text" id="inputLibelle" name="inputnbdev" class="form-control" placeholder="Saisir un nombre de developpeur" required autofocus>
+     <label for="inputbudget" class="sr-only">Budget:</label>
+    <input type="text" id="inputLibelle" name="inputbudget" class="form-control" placeholder="Saisir un budget" required autofocus>
+     <label for="inputcahierdescharges" class="sr-only">Cahier des charges:</label>    
+    <TEXTAREA id="inputcahierdescharges" name="inputcahierdescharges" class="form-control" placeholder="Saisir le cahier des charges" required autofocus rows=4 cols=40></TEXTAREA>
+<select name="inputidcontrat" class="form-control">
+        
+        {% for c in form.liste2%}
+            <option value="{{ c.id }}">{{ c.nom }} </option> 
+        {% endfor%}    
+    </select>    
+<select name="inputidutil" class="form-control">
+        
+        {% for r in form.liste4 %}
+            <option value="{{ r.idu }}">{{ r.nom }} {{ r.prenom }} </option> 
+        {% endfor%}    
+    </select>   
+<select name="inputidequip" class="form-control">
+        
+        {% for r in form.liste3 %}
+            <option value="{{ r.id }}">{{ r.libelle }}  </option> 
+        {% endfor%}    
+    </select>  
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAjouter">Ajouter</button>
+  </form>
+</div>    
+{% endif %}
+{% endblock %} 

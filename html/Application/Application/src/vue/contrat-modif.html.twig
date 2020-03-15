@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'un contrat {% endblock %}
+       
+{% block contenu %} <h1> Modification d'un contrat </h1> 
+
+{% if form.contrat is defined %} 
+    {% if form.contrat != null %}    
+        <div class="panel-body">
+        <form  class="form-signin" action="index.php?page=contratmodif" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" id="id" name="id" value="{{form.contrat.id}}"/> 
+        <label for="nom" class="sr-only">Nom:</label>
+        <input type="text" id="nom" name="nom" class="form-control" placeholder="Saisir un libellé" value="{{form.contrat.nom}}" required autofocus>
+        <label for="datesignature" class="sr-only">Date Signature:</label>
+          <input type="date" id="datesignature" name="datesignature" class="form-control" placeholder="Saisir une version" value="{{form.contrat.datesignature}}" required autofocus>
+           <label for="delaiproduction" class="sr-only">Délai production:</label>
+          <input type="date" id="delaiproduction" name="delaiproduction" class="form-control" placeholder="Saisir une version" value="{{form.contrat.delaiproduction}}" required autofocus>
+          <label for="coutglobal" class="sr-only">Cout Global:</label>
+        <input type="text" id="coutglobal" name="coutglobal" class="form-control" placeholder="Saisir un cout global" value="{{form.contrat.coutglobal}}" required autofocus>
+        
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Ajouter</button>
+        </form>
+        </div> 
+    {% else %}  
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contrat" class="violet">Retourner sur la liste des contrat</a></h1>
+        {% else %}    
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contrat" class="violet">Retourner sur la liste des contrat</a></h1>
+        {% endif %} 
+    {% endif %} 
+{% else %} 
+     <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+     <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=contrat" class="violet">Retourner sur la liste des contrat</a></h1>
+       
+{% endif %}
+{% endblock %} 

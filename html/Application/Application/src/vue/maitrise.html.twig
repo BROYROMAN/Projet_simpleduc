@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout de competence pour un dev {% endblock %}
+       
+{% block contenu %} <h1> Ajout de competence pour un dev </h1> 
+
+{% if form.valide is defined %} 
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">Ajout réussie</h1>
+    {% else %} 
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+    {% endif %}     
+{% else %}      
+  <div id="div1" class="centerol">
+    <ol data-draggable="target" class ="test1" id="test1"><center>Liste des compétences</center><br>
+  	{% for e in liste %}
+        <li data-draggable="item"  id="{{ e.id }}">{{ e.libelle }} {{ e.version }} </li>
+   {% endfor %}    
+</ol>
+ <form  class="form-signin" action="index.php?page=maitrise" method="post" enctype="application/x-www-form-urlencoded">
+<ol data-draggable="target" name="test" class="test2" id="test2"><center>Développeurs</center>
+    
+	 <select name="id" id="selectEquipe" onChange="LoadOutils(this.value)">        
+             <option>Choisir un dev </option>               
+        {% for r in liste2 %}
+             {% if r.codedev==codedev %}
+            <option id ="{{ r.codedev }}" value="{{ r.codedev }}" selected>{{ r.nom }} {{ r.pprenom }}</option> 
+            
+             {% else %}
+                 <option  id ="{{ r.codedev }}" value="{{ r.codedev }}">{{ r.nom }}  {{ r.prenom }}</option> 
+                 {%endif%}
+                 
+        {% endfor%}    
+    </select>     
+   
+    <br><br><div id="listeoutils">
+    {% for e in liste3 %}
+       <input type="hidden" name="nom[]"  id="{{ e.id }}.{{ e.libelle }} {{ e.version }}" /> <li id="{{ e.codedev }}" name="nom[]"  data-draggable="item" value="{{ e.codedev }}">{{ e.nom }} {{ e.prenom }} </li>
+   {% endfor %}
+    </div>    
+      
+</ol>
+          
+     </form>
+    </div>
+{% endif %}
+{% endblock %} 

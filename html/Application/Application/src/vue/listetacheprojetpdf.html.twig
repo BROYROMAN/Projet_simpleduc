@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Gestion des projets par utilisateurs {% endblock %}
+       
+{% block contenu %} <h1> Gestion des projets par utilisateurs </h1> 
+
+{% if form.valide is defined %} 
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+       {% else %}  
+       <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+    {% endif %}         
+{% endif %}         
+      <div class="panel-body">
+  <form  class="form-signin" action="index.php?page=listetacheprojetpdf" method="post" enctype="application/x-www-form-urlencoded">
+      <h3><b>Veuillez Choisir un projet pour afficher son nom, son cout global, le libelle de la tache,l'heure prevue du projet et son son cout !</b></h3>
+   <select name="nom" id="nom" class="form-control">
+        
+        {% for c in form.liste2%}
+            <option value="{{ c.nom }}">{{ c.nom }} </option> 
+        {% endfor%}    
+    </select>
+    
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btChoisir">Choisir</button>
+  </form>
+</div>    
+<div class="panel">
+  <!-- Default panel contents -->
+  <div class="panel-heading background-violet">Liste du projets Choisi par  l'utilisateur</div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+  <table class="table table-hover table-striped">
+      <tr><th>Nom du Projet</th><th>Libelle de la Tache</th><th>Heure Prevue</th><th>Date Début</th> <th>Date Fin</th><th>Nom Equipe</th><th>Développeurs</th></tr>
+   {% for u in liste %}
+          <tr><td>{{u.NOM_PROJET}}</td><td>{{u.NOM_TACHE}}</td><td>{{u.heureprevue}}</td><td>{{u.datesignature}}</td><td>{{u.delaiproduction}}</td><td>{{u.NOM_EQUIPE}}</td><td>{{u.developpeurs}}</td></tr> 
+   {% endfor %}    
+  </table>
+  </div>
+</div>
+  
+  <a href="index.php?page=tacheprojetpdf&nom={{nom}}" target="_blank">Télécharger le pdf montrant le projet choisi par l'utilisateur
+<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a> 
+
+{% endblock %} 
+

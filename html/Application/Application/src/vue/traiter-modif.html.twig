@@ -1,0 +1,47 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Modification d'une traitements {% endblock %}
+       
+{% block contenu %} <h1> Modification d'un traitements </h1> 
+
+{% if form.traiter is defined %} 
+    {% if form.traiter != null %}    
+        <div class="panel-body">
+        <form  class="form-signin" action="index.php?page=traitermodif" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" id="id" name="id" value="{{form.traiter.id}}"/> 
+        <label for="tache" class="sr-only">Tache:</label>
+    <select name="tache" id="tache" class="form-control">
+        
+        {% for r in form.liste %}
+            <option value="{{ r.id }}">{{ r.libelle }} </option> 
+        {% endfor%}    
+    </select>  
+    
+    <select name="dev" id="dev" class="form-control">
+        
+        {% for r in form.liste2 %}
+            <option value="{{ r.codedev }}">{{ r.nom }} {{ r.prenom }} </option> 
+        {% endfor%}    
+    </select>
+    
+     <label for="nbheure" class="sr-only">nbheure</label>
+    <input type="text" id="nbheure" name="nbheure" class="form-control" placeholder="Saisir un nombre heure " value= "{{form.traiter.nbheure}}" required autofocus>
+    
+        <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Ajouter</button>
+        </form>
+        </div> 
+    {% else %}  
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=traiter" class="violet">Retourner sur la liste des traitements</a></h1>
+        {% else %}    
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=traiter" class="violet">Retourner sur la liste des traitements</a></h1>
+        {% endif %} 
+    {% endif %} 
+{% else %} 
+     <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+     <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=traiter" class="violet">Retourner sur la liste des traitements</a></h1>
+       
+{% endif %}
+{% endblock %} 

@@ -1,0 +1,48 @@
+<style>
+#tableau {
+   
+    border-collapse: collapse;
+    width: 100%;
+}
+
+#tableau td, #tableau th {
+    border: 1px solid #ddd;
+    padding: 4px;
+    text-align: center;
+}
+
+#tableau tr:nth-child(even){background-color: #f2f2f2;}
+
+#tableau tr:hover {background-color: #ddd;}
+
+#tableau th {
+    
+   
+    background-color: #4CAF50;
+    color: white;
+}
+h1{
+    color: #ff3333 ;
+    text-align: center;
+}
+p{
+    font-size: 18px;
+    font-weight: bold;
+    color:  #007777;
+    text-align: center;
+}
+</style>
+
+  <!-- Default panel contents -->
+  <h1>Liste des projets par utilisateurs</h1>
+  <br>
+  <p>Ici vous trouverez la liste des projets par utilisaturs avec la date de signature du contrat, le nom du projet, le nombre de developpeurs et le cahier des charges.</p>
+  <br>
+  <div class="table-responsive">
+<table id="tableau" class="table table-hover table-striped">
+      <tr><th>Email</th><th>Nom</th><th>Prenom</th><th>Cahier des Charges</th><th>Nombre de developpeurs</th><th>Nom Du Projet</th><th>Date de signature du contrat</th></tr>
+   {% for p in liste %}
+          <tr><td>{{p.email}}</td><td>{{p.nomu}}</td><td>{{p.prenom}}</td><td>{{p.cahierdescharges}}</td><td>{{p.nbdev}}</td><td>{{p.nomp}}</td><td>{{p.datesignature}}</td></tr> 
+   {% endfor %}    
+</table>
+</div>

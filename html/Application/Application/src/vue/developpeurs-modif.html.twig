@@ -1,0 +1,60 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'un dev {% endblock %}
+       
+{% block contenu %} <h1> Modif d'un dev </h1> 
+
+{% if form.developpeur is defined %} 
+    {% if form.developpeur != null %}         
+    
+<div class="panel-body">
+  <form  class="form-signin" action="index.php?page=developpeursmodif" method="post" enctype="application/x-www-form-urlencoded">
+      <input type="hidden" id="codedev" name="codedev" value="{{form.developpeur.codedev}}"/> 
+    <label for="nom" class="sr-only">Nom:</label>
+    <input type="text" id="nom" name="nom" class="form-control" value="{{form.developpeur.nom}}"placeholder="Saisir un nom" required autofocus>
+     <label for="prenom" class="sr-only">Prenom:</label>
+    <input type="text" id="prenom" name="prenom" class="form-control" value="{{form.developpeur.prenom}}" placeholder="Saisir un prenom" required autofocus>
+     <label for="datenaissance" class="sr-only">datenaissance:</label>    
+    <input type="date" id="datenaissance" name="datenaissance" class="form-control" value="{{form.developpeur.date_naiss}}"placeholder="Saisir une date de naissance" required autofocus>
+    <label for="tel" class="sr-only">Tel:</label>
+    <input type="text" id="tel" name="tel" class="form-control" value="{{form.developpeur.tel}}" placeholder="Saisir un N° de tel" required autofocus>
+    <label for="adresse" class="sr-only">Adresse:</label>
+    <input type="text" id="adresse" name="adresse" class="form-control" value="{{form.developpeur.adresse}}"placeholder="Saisir une adresse" required autofocus>
+    <label for="remuneration" class="sr-only">Remuneration:</label>
+    <input type="text" id="remuneration" name="remuneration" class="form-control" value="{{form.developpeur.remuneration}}"placeholder="Saisir une remuneration" required autofocus>
+    <label for="couthoraire" class="sr-only">couthoraire:</label>
+    <input type="text" id="couthoraire" name="couthoraire" class="form-control" value="{{form.developpeur.couthoraire}}"placeholder="Saisir un couthoraire" required autofocus>
+    
+    
+
+<select name="idOutils" class="form-control">
+        
+        {% for r in form.liste2 %}
+            <option value="{{ r.id }}">{{ r.libelle }}  </option> 
+        {% endfor%}    
+    </select>   
+<select name="idEquipe" class="form-control">
+        
+        {% for r in form.liste3 %}
+            <option value="{{ r.id }}">{{ r.libelle }}  </option> 
+        {% endfor%}    
+    </select>  
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btModifier">Ajouter</button>
+  </form>
+</div>    
+        
+         {% else %}  
+        {% if form.valide == true %}
+            <h1 class="h3 mb-3 font-weight-normal">{{ form.message }} </h1>
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=developppeur" class="violet">Retourner sur la liste des devdelopppeur</a></h1>
+        {% else %}    
+            <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+            <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=developppeur" class="violet">Retourner sur la liste des devdelopppeur</a></h1>
+        {% endif %} 
+    {% endif %} 
+{% else %} 
+     <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+     <h1 class="h3 mb-3 font-weight-normal"><a href="index.php?page=developppeur" class="violet">Retourner sur la liste des devdelopppeur</a></h1>
+       
+{% endif %}
+{% endblock %} 

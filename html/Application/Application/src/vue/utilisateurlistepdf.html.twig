@@ -1,0 +1,34 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Gestion des projets par utilisateurs {% endblock %}
+       
+{% block contenu %} <h1> Gestion des projets par utilisateurs </h1> 
+
+{% if form.valide is defined %} 
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.message }}</h1>
+       {% else %}  
+       <h1 class="alert alert-danger" role="alert">{{ form.message }}</h1> 
+    {% endif %}         
+{% endif %}         
+  
+<div class="panel">
+  <!-- Default panel contents -->
+  <div class="panel-heading background-violet">Liste des projets par  utilisateurs</div>
+
+  <!-- Table -->
+  <div class="table-responsive">
+  <table class="table table-hover table-striped">
+      <tr><th>Email</th><th>Nom</th><th>Prénom</th><th>Cahierdescharges</th><th>Nombre de developpeur</th><th>Nom du projet</th><th>Date Signature</th></tr>
+   {% for u in liste %}
+          <tr><td>{{u.email}}</td><td>{{u.nomu}}</td><td>{{u.prenom}}</td><td>{{u.cahierdescharges}}</td><td>{{u.nbdev}}</td><td>{{u.nomp}}</td><td>{{u.datesignature}}</td></tr> 
+   {% endfor %}    
+  </table>
+  </div>
+</div>
+  
+  <a href="index.php?page=utilisateurpdf" target="_blank">Télécharger le pdf montrant les projet pour chaque utilisateur
+<span class="glyphicon glyphicon-download-alt" aria-hidden="true"></span></a> 
+
+{% endblock %} 
+

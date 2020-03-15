@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Ajout d'un contrat {% endblock %}
+       
+{% block contenu %} <h1> Ajout d'un contrat </h1> 
+
+{% if form.valide is defined %} 
+    {% if form.valide == true %}
+       <h1 class="h3 mb-3 font-weight-normal">Ajout réussie</h1>
+    {% else %} 
+       <h1 class="h3 mb-3 font-weight-normal">{{ form.valide.message }}</h1> 
+    {% endif %}     
+{% else %}      
+    
+<div class="panel-body">
+  <form  class="form-signin" action="index.php?page=contratajout" method="post" enctype="application/x-www-form-urlencoded">
+    <label for="nom" class="sr-only">NOM:</label>
+    <input type="text" id="nom" name="nom" class="form-control" placeholder="Saisir un nom" required autofocus>
+    <h3>Date Signature:</h3><label for="datesignature" class="sr-only">Date Signature:</label>
+   <input type="date" id="datesignature" name="datesignature" class="form-control" placeholder="Saisir une date signature" required autofocus>
+  <h3>Délai de production:</h3>  <label for="delaiproduction" class="sr-only">Delai production:</label>
+   <input type="date" id="delaiproduction" name="delaiproduction" class="form-control" placeholder="Saisir un delai de production" required autofocus>
+   <label for="coutglobal" class="sr-only">COUT GLOBAL:</label>
+    <input type="text" id="coutglobal" name="coutglobal" class="form-control" placeholder="Saisir un cout global" required autofocus>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" name="btAjouter">Ajouter</button>
+  </form>
+</div>    
+{% endif %}
+{% endblock %} 

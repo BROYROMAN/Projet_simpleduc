@@ -1,0 +1,45 @@
+{% extends "base.html.twig" %}
+
+{% block title %} {{ parent() }} - Attribution d'un dev à une equipe {% endblock %}
+       
+{% block contenu %} <h1> Attribution d'un dev à une equipe </h1> 
+
+  
+    
+    <div id="div1" class="centerol">
+    <ol data-draggable="target" class ="test1" id="test1"><center>Liste des developpeurs qui n'ont pas d'équipes</center><br>
+  	{% for e in liste %}
+        <li data-draggable="item"  id="{{ e.codedev }}">{{ e.nom }} {{ e.prenom }}</option> </li>
+   {% endfor %}    
+</ol>
+ <form  class="form-signin" action="index.php?page=equipedev" method="post" enctype="application/x-www-form-urlencoded">
+<ol data-draggable="target" name="test" class="test2" id="test2"><center>Liste des équipes</center>
+    
+	 <select name="id" id="selectEquipe" onChange="LoadEquipe(this.value)">        
+             <option>Choisir une équipe </option>               
+        {% for r in liste2 %}
+             {% if r.id==id %}
+            <option id ="{{ r.id }}" value="{{ r.id }}" selected>{{ r.libelle }} </option> 
+            
+             {% else %}
+                 <option  id ="{{ r.id }}" value="{{ r.id }}">{{ r.libelle }}</option> 
+                 {%endif%}
+                 
+        {% endfor%}    
+    </select>     
+   
+    <br><br><div id="listedev">
+    {% for e in liste3 %}
+       <input type="hidden" name="nom[]"  id="{{ e.codedev }}.{{ e.nom }} {{ e.prenom }}" /> <li id="{{ e.codedev }}" name="nom[]"  data-draggable="item" value="{{ e.codedev }}">{{ e.nom }} {{ e.prenom }} </li>
+   {% endfor %}
+    </div>    
+      
+</ol>
+          
+     </form>
+    </div>
+
+
+
+
+{% endblock %} 
